@@ -1,5 +1,7 @@
 # Platform-Player-Controller-Tutorial
 
+If you like it, lend me a Star, and don´t forget to follow me, to get further projects 
+
 Started with game assets and no functionality, .gitignore was "Stolen" from my <a href="https://github.com/edersonff/">
 brothers</a>   project to be cleaner
 <br/>
