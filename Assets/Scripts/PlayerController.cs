@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
     private float  movementInputDirection;
 
     private bool isFacingRight = true;
+    private bool isWalking;
     
     private Rigidbody2D rb;
-
+    private Animator anim;
     public float movementSpeed = 10.0f;
 
     public float jumpForce = 16.0f;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckInput();
         CheckMovementDirection();
+        UpdateAnimations();
     }
     private void FixedUpdate() 
     {
@@ -40,6 +43,19 @@ public class PlayerController : MonoBehaviour
         {
             Flip();
         }
+        if(rb.velocity.x != 0)
+        {
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+    }
+    
+    private void UpdateAnimations()
+    {
+        anim.SetBool("isWalking", isWalking);
     }
     private void CheckInput()
     {
