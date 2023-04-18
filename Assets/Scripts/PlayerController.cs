@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public float movementSpeed = 10.0f;
+
+    public float jumpForce = 16.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,17 @@ public class PlayerController : MonoBehaviour
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
+        if(Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
     }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
     private void ApplyMovement()
     {
         rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
