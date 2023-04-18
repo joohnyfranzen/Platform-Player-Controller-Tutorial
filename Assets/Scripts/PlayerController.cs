@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private Animator anim;
-    public float movementSpeed = 10.0f;
 
+    private int amountOfJumpsLeft;
+    public int amountOfJumps = 1;
+    public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
 
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        amountOfJumpsLeft = amountOfJumps;
     }
 
     // Update is called once per frame
@@ -50,11 +53,16 @@ public class PlayerController : MonoBehaviour
     {
         if(isGrounded && rb.velocity.y <= 0)
         {
-            canJump = true;
+            amountOfJumpsLeft = amountOfJumps;
+        }
+        
+        if(amountOfJumpsLeft <= 0)
+        {
+            canJump = false;
         }
         else
         {
-            canJump = false;
+            canJump = true;
         }
     }
     private void CheckMovementDirection() 
@@ -95,6 +103,7 @@ public class PlayerController : MonoBehaviour
         if(canJump)
         {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        amountOfJumpsLeft --;
         }
     }
 
