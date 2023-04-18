@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float  movementInputDirection;
+
+    private bool isFacingRight = true;
     
     private Rigidbody2D rb;
 
@@ -19,9 +21,23 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckInput();
+        CheckMovementDirection();
     }
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         ApplyMovement();    
+    }
+
+    private void CheckMovementDirection() 
+    {
+        if(isFacingRight && movementInputDirection < 0)
+        {
+            Flip();
+        }
+        else if(!isFacingRight && movementInputDirection > 0)
+        {
+            Flip();
+        }
     }
     private void CheckInput()
     {
@@ -30,5 +46,10 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovement()
     {
         rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+    }
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }
