@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isWallSliding", isWallSliding);
     }
     private void CheckInput()
     {
